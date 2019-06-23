@@ -1,0 +1,22 @@
+{
+    "name": "freedomsex/jwt-manager",
+    "description": "jwt-manager for freedomsex projects",
+    "type": "library",
+    "license": "GPLv3.0",
+    "minimum-stability": "dev", 
+    "authors": [
+        {
+            "name": "tebaly",
+            "email": "support@freedomsex.net"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.0",
+        "firebase/php-jwt": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "FreedomSex": "src/"
+        }
+    }
+}
