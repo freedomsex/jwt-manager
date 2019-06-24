@@ -3,7 +3,6 @@
     "description": "jwt-manager for freedomsex projects",
     "type": "library",
     "license": "GPLv3.0",
-    "minimum-stability": "dev", 
     "authors": [
         {
             "name": "tebaly",
