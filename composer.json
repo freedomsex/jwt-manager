@@ -1,6 +1,7 @@
 {
     "name": "freedomsex/jwt-manager",
     "description": "jwt-manager for freedomsex projects",
+    "version": "0.0.2",
     "type": "library",
     "license": "GPLv3.0",
     "authors": [
