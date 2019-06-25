@@ -15,9 +15,12 @@ class JWTManager
 
     public $projectDir = null;
 
-    public function __construct($projectDir)
+    public function __construct($secret_key, $public_key, $pass_phrase = null, $token_ttl = null)
     {
-        $this->projectDir = $projectDir;
+        $this->secret_key = $secret_key;
+        $this->public_key = $public_key;
+        $this->pass_phrase = $pass_phrase;
+        $this->token_ttl = $token_ttl ?? self::TLL;
     }
 
     /**
@@ -25,7 +28,7 @@ class JWTManager
      */
     public function expire()
     {
-        return time() + self::TLL;
+        return time() + $this->token_ttl;
     }
 
     private function payload($user, $expire)
@@ -41,13 +44,13 @@ class JWTManager
     public function create(UserInterface $user, $expire = null)
     {
         $payload = $this->payload($user, $expire);
-        $privateKey = file_get_contents($this->projectDir . self::KEY_PATH . '/private.key');
+        $privateKey = file_get_contents($this->secret_key);
         return JWT::encode($payload, $privateKey, self::ALG);
     }
 
     public function load($token)
     {
-        $publicKey = file_get_contents($this->projectDir . self::KEY_PATH . '/public.key');
+        $publicKey = file_get_contents($this->public_key);
         return JWT::decode($token, $publicKey);
     }
 
