@@ -63,5 +63,5 @@
         "php": ">=7.2.0"
     },
     "platform-dev": [],
-    "version": "0.1.0"
+    "version": "0.1.1"
 }
