@@ -51,7 +51,7 @@ class JWTManager
     public function load($token)
     {
         $publicKey = file_get_contents($this->public_key);
-        return JWT::decode($token, $publicKey);
+        return JWT::decode($token, $publicKey, [self::ALG]);
     }
 
 }
