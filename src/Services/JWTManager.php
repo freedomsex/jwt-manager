@@ -31,10 +31,11 @@ class JWTManager
         return time() + $this->token_ttl;
     }
 
-    private function payload($user, $expire)
+    private function payload(UserInterface $user, $expire)
     {
         $result = [
             'uid' => $user->getId(),
+            'roles' => $user->getRoles(),
             'exp' => $expire ?? $this->expire(),
 //            'ip'  => IP,
         ];
