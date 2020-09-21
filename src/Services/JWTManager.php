@@ -35,7 +35,9 @@ class JWTManager
     {
         $result = [
             'uid' => $user->getId(),
+            'uuid' => $user->getUuid(),
             'roles' => $user->getRoles(),
+            'sub' => $user->getSubject(),
             'exp' => $expire ?? $this->expire(),
 //            'ip'  => IP,
         ];
