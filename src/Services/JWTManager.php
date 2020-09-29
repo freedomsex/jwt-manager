@@ -4,7 +4,6 @@ namespace FreedomSex\Services;
 
 use Firebase\JWT\JWT;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class JWTManager
@@ -15,7 +14,7 @@ class JWTManager
 
     public $projectDir = null;
 
-    public function __construct($secret_key, $public_key, $pass_phrase = null, $token_ttl = null)
+    public function __construct($secret_key, $public_key, $token_ttl = null, $pass_phrase = null)
     {
         $this->secret_key = $secret_key;
         $this->public_key = $public_key;
@@ -35,12 +34,15 @@ class JWTManager
     {
         $result = [
             'uid' => $user->getId(),
-            'uuid' => $user->getUuid(),
             'roles' => $user->getRoles(),
-            'sub' => $user->getSubject(),
             'exp' => $expire ?? $this->expire(),
-//            'ip'  => IP,
         ];
+        if (method_exists($user, 'getUuid')) {
+            $result['uuid'] = $user->getUuid();
+        }
+        if (method_exists($user, 'getSubject')) {
+            $result['sub'] = $user->getSubject();
+        }
         return $result;
     }
 
