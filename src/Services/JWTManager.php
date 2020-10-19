@@ -64,6 +64,6 @@ class JWTManager
 /**
  * mkdir -P /config/keys/
  * $projectDir.'/config/keys/private.key'
- * ssh-keygen -t rsa -b 4096 -f private.key # Hit enter for all questions
+ * openssl genrsa -out private.key 1024
  * openssl rsa -in private.key -pubout -outform PEM -out public.key
  */
