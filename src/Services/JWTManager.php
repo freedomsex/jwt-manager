@@ -37,8 +37,11 @@ class JWTManager
             'roles' => $user->getRoles(),
             'exp' => $expire ?? $this->expire(),
         ];
-        if (method_exists($user, 'getUuid')) {
-            $result['uuid'] = $user->getUuid();
+        if (method_exists($user, 'getIdentityId')) {
+            $result['uuid'] = $user->getIdentityId();
+        }
+        if (method_exists($user, 'getAccess')) {
+            $result['access'] = $user->getAccess();
         }
         if (method_exists($user, 'getSubject')) {
             $result['sub'] = $user->getSubject();
