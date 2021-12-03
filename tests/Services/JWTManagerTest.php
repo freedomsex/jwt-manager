@@ -2,7 +2,6 @@
 
 namespace FreedomSex\Tests\Services;
 
-use FreedomSex\User\MinimalUserInterface;
 use FreedomSex\Tests\User;
 use FreedomSex\Services\JWTManager;
 use PHPUnit\Framework\TestCase;
@@ -10,11 +9,11 @@ use PHPUnit\Framework\TestCase;
 class JWTManagerTest extends TestCase
 {
     private $ttl = 600;
-    private MinimalUserInterface $user;
+    private $user;
 
     public function setUp(): void
     {
-        parent::setUp(); 
+        parent::setUp();
         $this->object = new JWTManager(
             '../keys/private.key',
             '../keys/public.key',

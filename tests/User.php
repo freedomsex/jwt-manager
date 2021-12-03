@@ -2,7 +2,7 @@
 
 namespace FreedomSex\Tests;
 
-class User implements \FreedomSex\User\MinimalUserInterface
+class User
 {
 
     public function getId()

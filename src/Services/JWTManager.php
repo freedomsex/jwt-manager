@@ -4,8 +4,6 @@ namespace FreedomSex\Services;
 
 use Firebase\JWT\JWT;
 
-use FreedomSex\User\MinimalUserInterface;
-
 class JWTManager
 {
     const TLL = 60 * 60;
@@ -19,21 +17,22 @@ class JWTManager
         $this->token_ttl = $token_ttl ?? self::TLL;
     }
 
-    /**
-     * @return null
-     */
-    public function expire()
+    public function expire(): int
     {
         return time() + $this->token_ttl;
     }
 
-    private function payload(MinimalUserInterface $user, $expire)
+    private function payload($user, $expire): array
     {
         $result = [
-            'uid' => $user->getId(),
-            'roles' => $user->getRoles(),
             'exp' => $expire ?? $this->expire(),
         ];
+        if (method_exists($user, 'getId')) {
+            $result['uid'] = $user->getId();
+        }
+        if (method_exists($user, 'getRoles')) {
+            $result['roles'] = $user->getRoles();
+        }
         if (method_exists($user, 'getIdentityId')) {
             $result['uuid'] = $user->getIdentityId();
         }
@@ -46,7 +45,7 @@ class JWTManager
         return $result;
     }
 
-    public function create(MinimalUserInterface $user, $expire = null)
+    public function create($user, $expire = null): string
     {
         $payload = $this->payload($user, $expire);
         $privateKey = file_get_contents($this->secret_key);
@@ -56,7 +55,7 @@ class JWTManager
         return JWT::encode($payload, $privateKey, self::ALG);
     }
 
-    public function load($token)
+    public function load($token): object
     {
         $publicKey = file_get_contents($this->public_key);
         if (!$publicKey) {
