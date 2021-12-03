@@ -22,6 +22,28 @@ class JWTManagerTest extends TestCase
         $this->user = new User();
     }
 
+    public function testNoKeys()
+    {
+        $object = new JWTManager(
+            '../key5/private.key',
+            '../key5/public.key',
+            $this->ttl
+        );
+        self::expectException(\RuntimeException::class);
+        $object->create();
+    }
+
+    public function testWrongKeysContent()
+    {
+        $object = new JWTManager(
+            '../keys/private5.key',
+            '../keys/public5.key',
+            $this->ttl
+        );
+        self::expectException(\RuntimeException::class);
+        $object->create();
+    }
+
     public function testExpire()
     {
         self::assertEquals(time() + $this->ttl, $this->object->expire());

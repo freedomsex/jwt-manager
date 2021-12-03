@@ -56,18 +56,24 @@ class JWTManager
     public function create($user = null, $expire = null): string
     {
         $payload = $this->payload($user, $expire);
+        if (!file_exists($this->secret_key)) {
+            throw new \RuntimeException('No JWT private Key');
+        }
         $privateKey = file_get_contents($this->secret_key);
         if (!$privateKey) {
-            throw new \RuntimeException('No JWT private Key');
+            throw new \RuntimeException('Wrong private key content');
         }
         return JWT::encode($payload, $privateKey, self::ALG);
     }
 
     public function load($token): object
     {
+        if (!file_exists($this->public_key)) {
+            throw new \RuntimeException('No JWT private Key');
+        }
         $publicKey = file_get_contents($this->public_key);
         if (!$publicKey) {
-            throw new \RuntimeException('No JWT public Key');
+            throw new \RuntimeException('Wrong public key content');
         }
         return JWT::decode($token, $publicKey, [self::ALG]);
     }
