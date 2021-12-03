@@ -1,4 +1,5 @@
-# JWT Manager
+
+## JWT Manager
 
 > for FreedomSex projects
 > 
@@ -31,7 +32,7 @@ $manager = new JWTManager(
 
 ## Generate JWT token
 
-Token based to User instance. 
+Simple JWT token. Only Expires in payload
 
 ```php
 $token = $manager->create();
