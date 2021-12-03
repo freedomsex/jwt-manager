@@ -4,15 +4,12 @@ namespace FreedomSex\Services;
 
 use Firebase\JWT\JWT;
 
-use Symfony\Component\Security\Core\User\UserInterface;
+use FreedomSex\User\MinimalUserInterface;
 
 class JWTManager
 {
     const TLL = 60 * 60;
     const ALG = 'RS256';
-    const KEY_PATH = '/config/keys';
-
-    public $projectDir = null;
 
     public function __construct($secret_key, $public_key, $token_ttl = null, $pass_phrase = null)
     {
@@ -30,7 +27,7 @@ class JWTManager
         return time() + $this->token_ttl;
     }
 
-    private function payload(UserInterface $user, $expire)
+    private function payload(MinimalUserInterface $user, $expire)
     {
         $result = [
             'uid' => $user->getId(),
@@ -49,24 +46,23 @@ class JWTManager
         return $result;
     }
 
-    public function create(UserInterface $user, $expire = null)
+    public function create(MinimalUserInterface $user, $expire = null)
     {
         $payload = $this->payload($user, $expire);
         $privateKey = file_get_contents($this->secret_key);
+        if (!$privateKey) {
+            throw new \RuntimeException('No JWT private Key');
+        }
         return JWT::encode($payload, $privateKey, self::ALG);
     }
 
     public function load($token)
     {
         $publicKey = file_get_contents($this->public_key);
+        if (!$publicKey) {
+            throw new \RuntimeException('No JWT public Key');
+        }
         return JWT::decode($token, $publicKey, [self::ALG]);
     }
 
 }
-
-/**
- * mkdir -P /config/keys/
- * $projectDir.'/config/keys/private.key'
- * openssl genrsa -out private.key 1024
- * openssl rsa -in private.key -pubout -outform PEM -out public.key
- */
