@@ -22,30 +22,38 @@ class JWTManager
         return time() + $this->token_ttl;
     }
 
-    private function payload($user, $expire): array
+    public function populatePayload(array $payload, $user = null): array
     {
-        $result = [
-            'exp' => $expire ?? $this->expire(),
-        ];
+        if (!$user) {
+            return $payload;
+        }
         if (method_exists($user, 'getId')) {
-            $result['uid'] = $user->getId();
+            $payload['uid'] = $user->getId();
         }
         if (method_exists($user, 'getRoles')) {
-            $result['roles'] = $user->getRoles();
+            $payload['roles'] = $user->getRoles();
         }
         if (method_exists($user, 'getIdentityId')) {
-            $result['uuid'] = $user->getIdentityId();
+            $payload['uuid'] = $user->getIdentityId();
         }
         if (method_exists($user, 'getAccess')) {
-            $result['access'] = $user->getAccess();
+            $payload['access'] = $user->getAccess();
         }
         if (method_exists($user, 'getSubject')) {
-            $result['sub'] = $user->getSubject();
+            $payload['sub'] = $user->getSubject();
         }
-        return $result;
+        return $payload;
     }
 
-    public function create($user, $expire = null): string
+    private function payload($user = null, ?int $expire = null): array
+    {
+        $payload = [
+            'exp' => $expire ?? $this->expire(),
+        ];
+        return $this->populatePayload($payload, $user);
+    }
+
+    public function create($user = null, $expire = null): string
     {
         $payload = $this->payload($user, $expire);
         $privateKey = file_get_contents($this->secret_key);

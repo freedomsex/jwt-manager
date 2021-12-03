@@ -31,6 +31,16 @@ class JWTManagerTest extends TestCase
     {
         $token = $this->object->create($this->user);
         self::assertEquals(3, count(explode('.', $token)));
+        $payload = (array) $this->object->load($token);
+        self::assertEquals(1, $payload['uid']);
+    }
+
+    public function testCreateWithoutUser()
+    {
+        $token = $this->object->create();
+        $payload = (array) $this->object->load($token);
+        self::assertNotNull($payload['exp']);
+        self::assertNull($payload['uid']);
     }
 
     public function testLoad()
