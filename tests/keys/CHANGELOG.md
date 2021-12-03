@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.5](https://github.com/freedomsex/jwt-manager/compare/0.2.4...0.2.5) (2021-12-03)
+
+
+### Bug Fixes
+
+* no required user instance ([255215a](https://github.com/freedomsex/jwt-manager/commit/255215afc49035da50e564a626ce85aebfe24ea4))
+
 ### [0.2.4](https://github.com/freedomsex/jwt-manager/compare/0.2.3...0.2.4) (2021-12-03)
 
 
