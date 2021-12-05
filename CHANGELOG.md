@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.8](https://github.com/freedomsex/jwt-manager/compare/0.2.7...0.2.8) (2021-12-05)
+
+
+### Bug Fixes
+
+* chlog ([72ac31d](https://github.com/freedomsex/jwt-manager/commit/72ac31dfa957a41ddf4dd190c570f69a6dc68975))
+
 ### [0.2.7](https://github.com/freedomsex/jwt-manager/compare/0.2.6...0.2.7) (2021-12-03)
 
 
