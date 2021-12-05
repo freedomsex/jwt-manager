@@ -2,89 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [0.2.2](https://github.com/freedomsex/jwt-manager/compare/v0.2.1...v0.2.2) (2020-11-07)
+### [0.2.7](https://github.com/freedomsex/jwt-manager/compare/0.2.6...0.2.7) (2021-12-03)
 
 
 ### Bug Fixes
 
-* access level ([69844bd](https://github.com/freedomsex/jwt-manager/commit/69844bd6ec2cf3757ca21c65041e1e63b5dc35d0))
-* gen ([f953998](https://github.com/freedomsex/jwt-manager/commit/f953998b9c02a561226a64824dd23f03a62d61dc))
+* key wrong path/content ([e0718ad](https://github.com/freedomsex/jwt-manager/commit/e0718ad53606191f9e41c805a8dbb04e3b52fab8))
 
-### [0.2.1](https://github.com/freedomsex/jwt-manager/compare/v0.2.0...v0.2.1) (2020-09-29)
-
-
-### Bug Fixes
-
-* method_exists uuid + subject ([528d942](https://github.com/freedomsex/jwt-manager/commit/528d942eca5d7cc071502765fa61ce785c6ff829))
-
-## [0.2.0](https://195.154.54.5///compare/v0.1.6...v0.2.0) (2020-09-21)
-
-
-### ⚠ BREAKING CHANGES
-
-* UUID
-
-userId is deprecated
-
-### Features
-
-* UUID + Subject Token (sub) ([2f08683](https://195.154.54.5///commit/2f086836568038fd658caebcced7688578886e0e))
+### [0.2.6](https://github.com/freedomsex/jwt-manager/compare/0.2.5...0.2.6) (2021-12-03)
 
 
 ### Bug Fixes
 
-* upd ([8a04f0a](https://195.154.54.5///commit/8a04f0ae97d798c4508ba3fbed5a6824553d56f5))
+* doc typo ([1b40f76](https://github.com/freedomsex/jwt-manager/commit/1b40f76068f79cd59d38da59902b757080a06957))
 
-### [0.1.6](https://git///compare/v0.1.5...v0.1.6) (2019-09-18)
-
-### [0.1.5](https://git///compare/v0.1.4...v0.1.5) (2019-09-18)
-
-### [0.1.4](https://git///compare/v0.1.3...v0.1.4) (2019-06-27)
+### [0.2.5](https://github.com/freedomsex/jwt-manager/compare/0.2.4...0.2.5) (2021-12-03)
 
 
 ### Bug Fixes
 
-* -a ([54e37e1](https://git///commit/54e37e1))
+* no required user instance ([255215a](https://github.com/freedomsex/jwt-manager/commit/255215afc49035da50e564a626ce85aebfe24ea4))
 
-
-
-### [0.1.3](https://git///compare/v0.1.2...v0.1.3) (2019-06-27)
-
-
-
-### [0.1.2](https://git///compare/v0.1.1...v0.1.2) (2019-06-27)
-
-
-
-### [0.1.1](https://git///compare/v0.1.0...v0.1.1) (2019-06-27)
-
-
-
-## [0.1.0](https://git///compare/v0.0.4...v0.1.0) (2019-06-25)
-
-
-### Features
-
-* keys path config ([b3d6f24](https://git///commit/b3d6f24))
-
-
-
-### [0.0.4](https://git///compare/v0.0.3...v0.0.4) (2019-06-25)
+### [0.2.4](https://github.com/freedomsex/jwt-manager/compare/0.2.3...0.2.4) (2021-12-03)
 
 
 ### Bug Fixes
 
-* psr-4 ([5ada973](https://git///commit/5ada973))
+* no interface ([4521ff1](https://github.com/freedomsex/jwt-manager/commit/4521ff1d34d4f7d6219b823e5aa40745f116a3d9))
 
-
-
-### [0.0.3](https://git///compare/v0.0.2...v0.0.3) (2019-06-25)
+### [0.2.3](https://github.com/freedomsex/jwt-manager/compare/v0.2.2...v0.2.3) (2021-12-03)
 
 
 ### Bug Fixes
 
-* nc ([38103e5](https://git///commit/38103e5))
-
-
-
-### 0.0.2 (2019-06-25)
+* no keys ([331a2b1](https://github.com/freedomsex/jwt-manager/commit/331a2b1caa4ecb51a827b5797f139c7aae46659c))
