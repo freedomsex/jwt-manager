@@ -90,12 +90,12 @@ class JWTManager
         }
         $payload = JWT::decode($token, $publicKey, [self::ALG]);
 
-        if (method_exists($payload, 'uuid')) {
+        if (property_exists($payload, 'uuid')) {
             trigger_deprecation('freedomsex/jwt-manager', '0.3.0',
                 'Using "%s" is deprecated. Use "%s" instead. Will be remover in 0.4',
             'UUID(Universally User ID)[uuid]', 'ID and UID(Universally ID)[uid]'
             );
-            if (method_exists($payload, 'uid')) {
+            if (property_exists($payload, 'uid')) {
                 trigger_deprecation('freedomsex/jwt-manager', '0.3.0',
                     'Using "%s" is deprecated. Use "%s" instead. Will be remover in 0.4',
                     'UID(User ID)[uid]', 'ID and UID(Universally ID)[uid]'
