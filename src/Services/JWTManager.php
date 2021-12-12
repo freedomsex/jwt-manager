@@ -34,6 +34,16 @@ class JWTManager
             $payload['roles'] = $user->getRoles();
         }
         if (method_exists($user, 'getUuid')) {
+            trigger_deprecation('freedomsex/jwt-manager', '0.3.0',
+                'Using "%s" is deprecated. Use "%s" instead. Will be remover in 0.4',
+            'UUID(Universally User ID)[getUuid]', 'ID[getId] and UID(Universally ID)[getUid]'
+            );
+            if (method_exists($user, 'getUid')) {
+                trigger_deprecation('freedomsex/jwt-manager', '0.3.0',
+                    'Using "%s" is deprecated. Use "%s" instead. Will be remover in 0.4',
+                    'UID(User ID)[getUid]', 'ID[getId] and UID(Universally ID)[getUid]'
+                );
+            }
             $payload['uuid'] = $user->getUuid();
         } else
         if (method_exists($user, 'getIdentityId')) {
@@ -78,7 +88,21 @@ class JWTManager
         if (!$publicKey) {
             throw new \RuntimeException('Wrong public key content');
         }
-        return JWT::decode($token, $publicKey, [self::ALG]);
+        $payload = JWT::decode($token, $publicKey, [self::ALG]);
+
+        if (method_exists($payload, 'uuid')) {
+            trigger_deprecation('freedomsex/jwt-manager', '0.3.0',
+                'Using "%s" is deprecated. Use "%s" instead. Will be remover in 0.4',
+            'UUID(Universally User ID)[uuid]', 'ID and UID(Universally ID)[uid]'
+            );
+            if (method_exists($payload, 'uid')) {
+                trigger_deprecation('freedomsex/jwt-manager', '0.3.0',
+                    'Using "%s" is deprecated. Use "%s" instead. Will be remover in 0.4',
+                    'UID(User ID)[uid]', 'ID and UID(Universally ID)[uid]'
+                );
+            }
+        }
+        return $payload;
     }
 
 }

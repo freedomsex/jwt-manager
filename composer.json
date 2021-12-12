@@ -11,7 +11,8 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "firebase/php-jwt": "^5.0"
+        "firebase/php-jwt": "^5.0",
+        "symfony/deprecation-contracts": "^2.5"
     },
     "suggest": {
         "symfony/security": "*"
