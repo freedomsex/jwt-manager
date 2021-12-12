@@ -75,6 +75,13 @@ $token = $manager->create($user);
 // getUid - uid
 // or
 // getIdentityId - uid
+``` 
+```php 
+// getId - id
+// and
+// getUid - uid (deprecated)
+// and
+// getIdentityId - uuid
 ```
 
 #### Expires "alternative" way
