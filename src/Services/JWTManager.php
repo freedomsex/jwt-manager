@@ -28,6 +28,7 @@ class JWTManager
             return $payload;
         }
         if (method_exists($user, 'getId')) {
+            $payload['id'] = $user->getId();
             $payload['uid'] = $user->getId();
         }
         if (method_exists($user, 'getRoles')) {
