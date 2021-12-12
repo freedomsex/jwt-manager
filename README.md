@@ -69,6 +69,13 @@ $token = $manager->create($user);
 #### Deprecations
 
 `uuid` - deprecated since 0.4: use `uid` and `id` 
+```php
+$token = $manager->create($user);
+// getId - id
+// getUid - uid
+// or
+// getIdentityId - uid
+```
 
 #### Expires "alternative" way
 ```php
