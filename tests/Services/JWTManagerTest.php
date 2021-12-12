@@ -2,8 +2,13 @@
 
 namespace FreedomSex\Tests\Services;
 
+use FreedomSex\Tests\Identity;
 use FreedomSex\Tests\User;
 use FreedomSex\Services\JWTManager;
+use FreedomSex\Tests\UserUid;
+use FreedomSex\Tests\UserUidIdentity;
+use FreedomSex\Tests\UserUidUuid;
+use FreedomSex\Tests\UserUuid;
 use PHPUnit\Framework\TestCase;
 
 class JWTManagerTest extends TestCase
@@ -70,5 +75,55 @@ class JWTManagerTest extends TestCase
         $token = $this->object->create($this->user);
         $payload = (array) $this->object->load($token);
         self::assertEquals('ROLE_USER', $payload['roles'][0]);
+    }
+
+    public function testCreateIdentity()
+    {
+        $token = $this->object->create(new Identity());
+        $payload = (array) $this->object->load($token);
+        self::assertArrayHasKey('id', $payload);
+        self::assertArrayHasKey('uid', $payload);
+        self::assertArrayNotHasKey('uuid', $payload);
+    }
+
+    public function testCreateUuid()
+    {
+        $token = $this->object->create(new UserUuid());
+        $payload = (array) $this->object->load($token);
+        self::assertArrayHasKey('id', $payload);
+        self::assertArrayHasKey('uid', $payload);
+        self::assertArrayNotHasKey('uuid', $payload);
+    }
+
+    public function testCreateUid()
+    {
+        $token = $this->object->create(new UserUid());
+        $payload = (array) $this->object->load($token);
+        self::assertArrayHasKey('id', $payload);
+        self::assertArrayHasKey('uid', $payload);
+        self::assertArrayNotHasKey('uuid', $payload);
+        self::assertNotEquals($payload['id'], $payload['uid']);
+    }
+
+    public function testCreateUidUuid()
+    {
+        $token = $this->object->create(new UserUidUuid());
+        $payload = (array) $this->object->load($token);
+        self::assertArrayHasKey('id', $payload);
+        self::assertArrayHasKey('uid', $payload);
+        self::assertArrayHasKey('uuid', $payload);
+        self::assertEquals($payload['id'], $payload['uid']);
+        self::assertNotEquals($payload['uid'], $payload['uuid']);
+    }
+
+    public function testCreateUidIdentity()
+    {
+        $token = $this->object->create(new UserUidIdentity());
+        $payload = (array) $this->object->load($token);
+        self::assertArrayHasKey('id', $payload);
+        self::assertArrayHasKey('uid', $payload);
+        self::assertArrayHasKey('uuid', $payload);
+        self::assertEquals($payload['id'], $payload['uid']);
+        self::assertNotEquals($payload['uid'], $payload['uuid']);
     }
 }

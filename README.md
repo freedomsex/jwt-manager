@@ -66,6 +66,10 @@ $token = $manager->create($user);
 // getSubject -sub
 ```
 
+#### Deprecations
+
+`uuid` - deprecated since 0.4: use `uid` and `id` 
+
 #### Expires "alternative" way
 ```php
 $token = $manager->create($user, 1638549013); 

@@ -34,10 +34,24 @@ class JWTManager
         if (method_exists($user, 'getRoles')) {
             $payload['roles'] = $user->getRoles();
         }
+        if (method_exists($user, 'getAccess')) {
+            $payload['access'] = $user->getAccess();
+        }
+        if (method_exists($user, 'getSubject')) {
+            $payload['sub'] = $user->getSubject();
+        }
+
+        if (method_exists($user, 'getIdentityId')) {
+            if (!method_exists($user, 'getUid') and method_exists($user, 'getId')) {
+                $payload['uid'] = $user->getIdentityId();
+            } else {
+                $payload['uuid'] = $user->getIdentityId();
+            }
+        } else
         if (method_exists($user, 'getUuid')) {
             trigger_deprecation('freedomsex/jwt-manager', '0.3.0',
                 'Using "%s" is deprecated. Use "%s" instead. Will be remover in 0.4',
-            'UUID(Universally User ID)[getUuid]', 'ID[getId] and UID(Universally ID)[getUid]'
+                'UUID(Universally User ID)[getUuid]', 'ID[getId] and UID(Universally ID)[getUid]'
             );
             if (method_exists($user, 'getUid')) {
                 trigger_deprecation('freedomsex/jwt-manager', '0.3.0',
@@ -47,14 +61,8 @@ class JWTManager
             }
             $payload['uuid'] = $user->getUuid();
         } else
-        if (method_exists($user, 'getIdentityId')) {
-            $payload['uuid'] = $user->getIdentityId();
-        }
-        if (method_exists($user, 'getAccess')) {
-            $payload['access'] = $user->getAccess();
-        }
-        if (method_exists($user, 'getSubject')) {
-            $payload['sub'] = $user->getSubject();
+        if (method_exists($user, 'getUid')) {
+            $payload['uid'] = $user->getUid();
         }
         return $payload;
     }

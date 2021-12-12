@@ -4,7 +4,6 @@ namespace FreedomSex\Tests;
 
 class User
 {
-
     public function getId()
     {
         return '1';
