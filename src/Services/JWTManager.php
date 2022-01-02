@@ -85,9 +85,7 @@ class JWTManager
         if (!$privateKey) {
             throw new \RuntimeException('Wrong private key content');
         }
-        $token = JWT::encode($payload, $privateKey, self::ALG);
-        unset($privateKey);
-        return $token;
+        return JWT::encode($payload, $privateKey, self::ALG);
     }
 
     public function load($token): object
@@ -100,7 +98,7 @@ class JWTManager
             throw new \RuntimeException('Wrong public key content');
         }
         $payload = JWT::decode($token, $publicKey, [self::ALG]);
-        unset($publicKey);
+
         if (property_exists($payload, 'uuid')) {
             trigger_deprecation('freedomsex/jwt-manager', '0.3.0',
                 'Using "%s" is deprecated. Use "%s" instead. Will be remover in 0.4',
