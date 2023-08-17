@@ -9,11 +9,11 @@ class JWTManager
     const TLL = 60 * 60;
     const ALG = 'RS256';
 
-    public function __construct($secret_key, $public_key, $token_ttl = null, $pass_phrase = null)
+    public function __construct($secret_key, $public_key, $token_ttl = null, $issuer = null)
     {
         $this->secret_key = $secret_key;
         $this->public_key = $public_key;
-        $this->pass_phrase = $pass_phrase;
+        $this->issuer = $issuer;
         $this->token_ttl = $token_ttl ?? self::TLL;
     }
 
@@ -70,6 +70,7 @@ class JWTManager
     private function payload($user = null, ?int $expire = null): array
     {
         $payload = [
+            'iss' => $this->issuer,
             'exp' => $expire ?? $this->expire(),
         ];
         return $this->populatePayload($payload, $user);

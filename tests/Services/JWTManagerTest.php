@@ -22,7 +22,8 @@ class JWTManagerTest extends TestCase
         $this->object = new JWTManager(
             '../keys/private.key',
             '../keys/public.key',
-            $this->ttl
+            $this->ttl,
+            'fs-issuer'
         );
         $this->user = new User();
     }
@@ -125,5 +126,12 @@ class JWTManagerTest extends TestCase
         self::assertArrayHasKey('uuid', $payload);
         self::assertEquals($payload['id'], $payload['uid']);
         self::assertNotEquals($payload['uid'], $payload['uuid']);
+    }
+
+    public function testIssuer()
+    {
+        $token = $this->object->create($this->user);
+        $payload = (array) $this->object->load($token);
+        self::assertEquals('fs-issuer', $payload['iss']);
     }
 }
